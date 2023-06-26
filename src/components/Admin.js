@@ -1,6 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 
 const Admin = () =>{
+    const location = useLocation()
+    const loggedIn = location.state?.loggedIn 
+    console.log(loggedIn)
     const navigate = useNavigate()
     const logout = async (event) => {
        try{
@@ -28,6 +31,7 @@ const Admin = () =>{
     
     return (
         <div>
+            {loggedIn && (
             <ol>
                 <Link to='/addproduct'><li>Add a Product</li></Link>
                 <Link to='/updateproduct'><li>Update a Product</li></Link>
@@ -37,6 +41,7 @@ const Admin = () =>{
                 <Link to='/deleteritual'><li>Delete a Ritual</li></Link>
                 <li onClick={logout}>Logout</li>
             </ol>
+            )}
         </div>
     )
 }
